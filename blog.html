@@ -39,13 +39,6 @@
 						</header>
 						<p>
 							This project extends the existing CaMicroscope which is A Web Based Annotation and Visualization Platform for Digitized Whole Slide Images.
-							The following are the tasks for me this summer:
-							<ul>
-								<li>Creating a workflow to allow model developers to allow their model to be run on a selected image or region of interest by the client, to identify cellular features or cancer.</li>
-								<li>Add the latest deep learning models researched in the area of digital pathology to caMicroscope to help the pathologists.</li>
-								<li>Improve the segmentation app.</li>
-								<li>A tutorial to enable users to make models compatible with caMicroscope.</li>
-							</ul>
 						</p>
 					</div>
 					<div class="col-6 col-12-medium imp-medium">
@@ -78,6 +71,26 @@
 							</p>
 							<p>
 								Further in this blog, I will document about the components I'll be using to complete this project.
+							</p>
+							<header class="major">
+								<h2>1. Docker</h2>
+							</header>
+							<p>
+								CaMicroscope and all its components are available as a Docker Distribution. At first, all I had to use about docker was to <em>build</em> and <em>up</em> the container. But as I started to understand how the whole stack comes together, I read more about it.
+							</p>
+							<p>
+								The one issue I faced was that everytime I made any changes to the <em>viewer</em>, I had to rebuild the container. This was quite annoying. I googled but didn't find any satisfactory results. So, I asked my mentors and they suggested to mount the volume. So I went ahead and read about the file system of docker and volumes.
+							</p>
+							<p>
+								<b>Docker File System</b> <br>
+								Docker container is created from a read-only template called docker image. Each Docker image references a list of read-only layers that represent filesystem differences. Layers are stacked on top of each other to form a base for a container’s root filesystem. The Docker storage driver is responsible for stacking these layers and providing a single unified view. When we start a container, Docker takes the read-only image and adds a read-write layer on top. If the running container modifies an existing file, the file is copied out of the underlying read-only layer and into the top-most read-write layer where the changes are applied. The version in the read-write layer hides the underlying file, but does not destroy it — it still exists in the underlying layer. When the container is deleted the read-write layer is also deleted but the underlying image remains unchanged. Docker calls this combination of read-only layers with a read-write layer on top a <em>Union File System</em>.
+							</p>
+							<p>
+								<b>The solution</b> to the issue I faced was <em>volumes</em>. It is Docker’s mechanism for managing files outside the lifecycle of the container. It allows accessing files on the host from the container. 
+								In other words, volumes are directories (or files) that are outside of the default Union File System and exist as normal directories and files on the host filesystem. 
+							</p>
+							<p>
+								Since we're using docker-compose as it's multi-container environment, all I had to do was to add <code>../caMicroscope/apps:/var/www/html/apps</code> under the volumes of the <em>viewer</em> in the config file. I found docker really fascinating!
 							</p>
 						</div>
 					</div>
