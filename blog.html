@@ -120,9 +120,9 @@
 								ES6 arrow function is the alternative syntax for the standard ES5 function. Basic syntax is:<br> 
 								<code>(param1, param2, …, paramN) => { statements } </code> <br>
 								I'd like to talk about the difference between ES5 function and arrow function - the <em>this</em> binding. <br>
-								They don't bind their own <em>this</em> value. Instead, the <em>this</em> value of the scope in which it was defined is accessible. The following example will make the above statement more clear. 
-								<pre style="color: pink;"> <code>
-const event = {
+								The arrow functions don't bind their own <em>this</em> value. Instead, the <em>this</em> value of the scope in which it was defined is accessible. The following example will make the above statement more clear.
+								
+<pre style="color: #E8448C; margin: 0 auto;"> <code>const event = {
 	name: 'Birthday Party',
 	guestList: ['Andrew', 'Jen', 'Mike'],
 	printGuestList() {
@@ -132,27 +132,28 @@ const event = {
 		})
 	}
 }
-event.printGuestList()
-								</code> </pre>
-								The arrow function passed to forEach is able to access this.name correctly, as it’s defined as an arrow function and doesn’t have a this binding of its own. That code wouldn’t work if you swapped out the arrow function for a standard function. <br>
-								It would work for the following variation in <em>printGuestList</em> function: <br>
-								<pre style="color: pink"><code>
-printGuestList() {
+event.printGuestList()</code> </pre>
+
+								The arrow function passed to <em>forEach</em> is able to access <em>this.name</em> correctly, as it’s defined as an arrow function and doesn’t have a this binding of its own. That code wouldn’t work if you swapped out the arrow function for a standard function as it won't be able to access the <em>this</em> of the object it is declared into. <br>
+								It would work for the following variation in <em>printGuestList</em> function: <br><br>
+								
+<pre style="color: #E8448C"><code>printGuestList() {
 	var that = this
 	console.log('Guest list for ' + this.name)
 	this.guestList.forEach(function(guest){
 		console.log(guest + ' is attending ' + that.name)
 	})
-}	
-								</code></pre>
-								<pre style="color: pink"><code>
-printGuestList() {
+}</code></pre>	
+								Here, we're declaring a variable with the <em>this</em> value for the function to access. <br> <br>					
+								
+<pre style="color: #E8448C"><code>printGuestList() {
 	console.log('Guest list for ' + this.name)
 	this.guestList.forEach(function(guest){
 		console.log(guest + ' is attending ' + this.name)
 	}.bind(this))
-}	
-								</code></pre>
+}</code></pre>
+								Here, we're binding the <em>this</em> to the function. <br>
+								Arrow functions come handy in such situations.
 
 							</p>
 						</div>
