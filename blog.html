@@ -72,10 +72,10 @@
 								<h2>Why I chose this project?</h2>
 							</header>
 							<p>
-								I wanted to participate in this program from a long time. I was really nervous when the organizations were announced. All the questions flooded in my mind like will I be able to do it? Will I find the right project for me? I started shortlisting some organizations based on my skill sets. I majorly worked on machine learning the whole 2018 and also had some previous experience in JavaScript. I definitely didn't want to do anything purely web but. So after going through many of them, I can down to two organizations - BMI, Emory University and Red Hen Labs.
+								I wanted to participate in this program since a long time. I was really nervous when the organizations were announced. My mind was flooded with multiple questions, including whether or not I'll be able to do it? Will I find the right project for me? I started shortlisting some organizations based on my skill sets. I had devoted most of time in the year 2018 working on machine learning and deep learning, with a previous experience in JS. I definitely didn't want to do anything purely web. So after going through many of them, I can down to two organizations - BMI, Emory University and Red Hen Labs.
 							</p>
 							<p>
-								This project initially caught my interest as it was literally a combo of all the skills I had and all the things I wanted to work on. I've been interested in medical data since a long time. And, this project focused on browser-based models on such data, made me feel really enthusiastic to dig deeper and think of all the ways CaMicroscope could be improved. I'm really happy and grateful to be able to work on this project this summers!
+								This project initially caught my interest as it was literally a combo of all the skills I had and all the things I wanted to work on. I've been interested in medical data since a long time. This project focuses on browser-based models on such data which intensified my enthusiasm to dig deeper and think of all the ways CaMicroscope could be improved. I'm really happy and grateful to be able to work on this project this summers!
 							</p>
 							<p>
 								The following are the tasks for me this summer:
@@ -108,6 +108,52 @@
 							</p>
 							<p>
 								Since we're using docker-compose as it's multi-container environment, all I had to do was to add <code>../caMicroscope/apps:/var/www/html/apps</code> under the volumes of the <em>viewer</em> in the config file. I found docker really fascinating!
+							</p>
+							<header class="major" id="1">
+								<h2>2. About JS</h2>
+							</header>
+							<p>
+								I've been working ON-OFF with JavaScript for more than a year now. It is literally impossible to avoid getting back to it accounting to the accessibility the language provides. It's nearly impossible to master this language! Everytime I work with it, I learn something. Further, I'll be talking about standard functions and arrow functions.
+							</p>
+							<p>
+								<b>Arrow functions and <em>this</em> binding</b> <br>
+								ES6 arrow function is the alternative syntax for the standard ES5 function. Basic syntax is:<br> 
+								<code>(param1, param2, …, paramN) => { statements } </code> <br>
+								I'd like to talk about the difference between ES5 function and arrow function - the <em>this</em> binding. <br>
+								They don't bind their own <em>this</em> value. Instead, the <em>this</em> value of the scope in which it was defined is accessible. The following example will make the above statement more clear. 
+								<pre style="color: pink;"> <code>
+const event = {
+	name: 'Birthday Party',
+	guestList: ['Andrew', 'Jen', 'Mike'],
+	printGuestList() {
+		console.log('Guest list for ' + this.name)
+		this.guestList.forEach((guest) => {
+			console.log(guest + ' is attending ' + this.name)
+		})
+	}
+}
+event.printGuestList()
+								</code> </pre>
+								The arrow function passed to forEach is able to access this.name correctly, as it’s defined as an arrow function and doesn’t have a this binding of its own. That code wouldn’t work if you swapped out the arrow function for a standard function. <br>
+								It would work for the following variation in <em>printGuestList</em> function: <br>
+								<pre style="color: pink"><code>
+printGuestList() {
+	var that = this
+	console.log('Guest list for ' + this.name)
+	this.guestList.forEach(function(guest){
+		console.log(guest + ' is attending ' + that.name)
+	})
+}	
+								</code></pre>
+								<pre style="color: pink"><code>
+printGuestList() {
+	console.log('Guest list for ' + this.name)
+	this.guestList.forEach(function(guest){
+		console.log(guest + ' is attending ' + this.name)
+	}.bind(this))
+}	
+								</code></pre>
+
 							</p>
 						</div>
 					</div>
