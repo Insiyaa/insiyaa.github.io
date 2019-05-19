@@ -5,6 +5,7 @@
 		<title>Insiyeah</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
@@ -20,13 +21,29 @@
 		</style>
 	</head>
 	<body class="is-preload">
-		<section class="navbar">
-			<div class="container">
-				<div class="row">
-					<a href="./index.html" style="text-decoration: none !important;border:0px !important;outline:none;border-width: 0px;outline-width:0px;border-bottom: none;"><span class="fas fa-home"></span></a>
-				</div>
-			</div>
-		</section>
+		<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+		  <a class="navbar-brand" href="#">    </a>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+		    <ul class="navbar-nav">
+		      <li class="nav-item active">
+		        <a class="nav-link" href="./index.html"><i class="fas fa-home"></i> <span class="sr-only">(current)</span></a>
+		      </li>
+		      <li class="nav-item dropdown">
+		        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		          Content
+		        </a>
+		        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+		          <a class="dropdown-item" href="#0">Why I chose this project?</a>
+		          <a class="dropdown-item" href="#1">Docker</a>
+		          <a class="dropdown-item" href="#footer">Contact</a>
+		        </div>
+		      </li>
+		    </ul>
+		  </div>
+		</nav>
 		
 		<!-- One -->
 		<section id="one" class="main style1">
@@ -51,7 +68,7 @@
 				<div class="container">
 					<div class="row gtr-150">
 						<div class="col-12">
-							<header class="major">
+							<header class="major" id="0">
 								<h2>Why I chose this project?</h2>
 							</header>
 							<p>
@@ -72,14 +89,14 @@
 							<p>
 								Further in this blog, I will document about the components I'll be using to complete this project.
 							</p>
-							<header class="major">
+							<header class="major" id="1">
 								<h2>1. Docker</h2>
 							</header>
 							<p>
 								CaMicroscope and all its components are available as a Docker Distribution. At first, all I had to use about docker was to <em>build</em> and <em>up</em> the container. But as I started to understand how the whole stack comes together, I read more about it.
 							</p>
 							<p>
-								The one issue I faced was that everytime I made any changes to the <em>viewer</em>, I had to rebuild the container. This was quite annoying. I googled but didn't find any satisfactory results. So, I asked my mentors and they suggested to mount the volume. So I went ahead and read about the file system of docker and volumes.
+								<b>The issue</b> I faced was that everytime I made any changes to the <em>viewer</em>, I had to rebuild the container. This was quite annoying. I googled but didn't find any satisfactory results. So, I asked my mentors and they suggested to mount the volume. So I went ahead and read about the file system of docker and volumes.
 							</p>
 							<p>
 								<b>Docker File System</b> <br>
@@ -117,6 +134,9 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 	</body>
 </html>
