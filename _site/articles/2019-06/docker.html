@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="Docker for the first time.">
+  <meta name="keywords" content="blog and jekyll">
+  <meta name="author" content="Docker | Insiyah">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f5f5">
+
+  <!-- Twitter Tags -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Docker | Insiyah">
+  <meta name="twitter:description" content="Docker for the first time.">
+  
+    <meta property="twitter:image" content="/img/leonids-logo.png">
+  
+
+  <!-- Open Graph Tags -->
+  <meta property="og:type" content="blog">
+  <meta property="og:url" content="/articles/2019-06/docker">
+  <meta property="og:title" content="Docker | Insiyah">
+  <meta property="og:description" content="Docker for the first time.">
+  
+    <meta property="og:image" content="/img/leonids-logo.png">
+  
+  <title>Docker | Insiyah</title>
+
+  <!-- CSS files -->
+  <link rel="stylesheet" href="/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/main.css">
+
+  <link rel="canonical" href="/articles/2019-06/docker">
+  <link rel="alternate" type="application/rss+xml" title="Insiyah" href="/feed.xml" />
+
+  <!-- Icons -->
+  <!-- 16x16 -->
+  <link rel="shortcut icon" href="/favicon.ico">
+  <!-- 32x32 -->
+  <link rel="shortcut icon" href="/favicon.png">
+</head>
+
+
+<body>
+  <div class="row">
+    <div class="col s12 m3">
+      <div class="table cover">
+        
+
+<div class="cover-card table-cell table-middle">
+  
+  <a href="/">
+    <img src="/img/my_icon.png" alt="" class="avatar">
+  </a>
+  
+  <a href="/" class="author_name">Insiyah Hajoori</a>
+  <span class="author_job">Developer</span>
+  <span class="author_bio mbm">Learn, unlearn, relearn!</span>
+  <nav class="nav">
+    <ul class="nav-list">
+      <li class="nav-item">
+        <a href="/">home</a>
+      </li>
+       
+      <li class="nav-item">
+        <a href="/archive/">Archive</a>
+      </li>
+          
+      <li class="nav-item">
+        <a href="/categories/">Categories</a>
+      </li>
+            
+      <li class="nav-item">
+        <a href="/resume/">Resume</a>
+      </li>
+        
+      <li class="nav-item">
+        <a href="/tags/">Tags</a>
+      </li>
+       
+    </ul>
+  </nav>
+  <script type="text/javascript">
+  // based on http://stackoverflow.com/a/10300743/280842
+  function gen_mail_to_link(hs, subject) {
+    var lhs,rhs;
+    var p = hs.split('@');
+    lhs = p[0];
+    rhs = p[1];
+    document.write("<a class=\"social-link-item\" target=\"_blank\" href=\"mailto");
+    document.write(":" + lhs + "@");
+    document.write(rhs + "?subject=" + subject + "\"><i class=\"fa fa-fw fa-envelope\"></i><\/a>");
+  }
+</script>
+<div class="social-links">
+  <ul>
+    
+      <li>
+      <script>gen_mail_to_link('insiyahhajoori@gmail.com', 'Hello from website');</script>
+      </li>
+    
+    
+    
+    
+    <li><a href="http://linkedin.com/in/insiyeah" class="social-link-item" target="_blank"><i class="fa fa-fw fa-linkedin"></i></a></li>
+    
+    
+    
+    
+    <li><a href="http://github.com/Insiyaa" class="social-link-item" target="_blank"><i class="fa fa-fw fa-github"></i></a></li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+  </ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+    <div class="col s12 m9">
+      <div class="post-listing">
+        <a class="btn" href= "/" >
+  Home
+</a>
+
+
+
+<div id="post">
+  <header class="post-header">
+    <h1 title="Docker">Docker</h1>
+    <span class="post-meta">
+      <span class="post-date">
+        3 JUN 2019
+      </span>
+      •
+      <span class="read-time" title="Estimated read time">
+  
+  
+    2 mins read
+  
+</span>
+
+    </span>
+
+  </header>
+
+  <article class="post-content">
+    <p>CaMicroscope and all its components are available as a Docker Distribution. At first, I thought it would be something really really complex. But fortunately, all I had to use about docker was to <code class="highlighter-rouge">build</code> and <code class="highlighter-rouge">up</code> the container. But as I started to understand how the whole stack comes together, I got interested!</p>
+
+<p><strong>The issue</strong> I faced was that everytime I made any changes to the viewer, I had to rebuild the container. This was quite annoying. I googled but didn’t find any satisfactory results. So, I asked my mentors and they suggested to <em>mount the volume</em>. So I went ahead and read about the file system of docker and volumes.</p>
+
+<h3 id="docker-file-system">Docker File System</h3>
+<p>Docker container is created from a read-only template called docker image. Each Docker image references a list of read-only layers that represent filesystem differences. Layers are stacked on top of each other to form a base for a container’s root filesystem. The Docker storage driver is responsible for stacking these layers and providing a single unified view. When we start a container, Docker takes the read-only image and adds a read-write layer on top. If the running container modifies an existing file, the file is copied out of the underlying read-only layer and into the top-most read-write layer where the changes are applied. The version in the read-write layer hides the underlying file, but does not destroy it — it still exists in the underlying layer. When the container is deleted the read-write layer is also deleted but the underlying image remains unchanged. Docker calls this combination of read-only layers with a read-write layer on top a Union File System.</p>
+
+<p><strong>The solution</strong> to the issue I faced was <em>volumes</em>. It is Docker’s mechanism for managing files outside the lifecycle of the container. It allows accessing files on the host from the container. In other words, volumes are directories (or files) that are outside of the default Union File System and exist as normal directories and files on the host filesystem.</p>
+
+<p>Since we’re using docker-compose as it’s multi-container environment, all I had to do was to add <code class="highlighter-rouge">../caMicroscope/apps:/var/www/html/apps</code>  under the volumes of the viewer in the config file. I really enjoyed the concept of docker!</p>
+
+
+  </article>
+</div>
+
+<div class="share-buttons">
+  <h6>Share on: </h6>
+  <ul>
+    <li>
+      <a href="https://twitter.com/intent/tweet?text=/articles/2019-06/docker" class="twitter btn" title="Share on Twitter"><i class="fa fa-twitter"></i><span> Twitter</span></a>
+    </li>
+    <li>
+      <a href="https://www.facebook.com/sharer/sharer.php?u=/articles/2019-06/docker" class="facebook btn" title="Share on Facebook"><i class="fa fa-facebook"></i><span> Facebook</span></a>
+    </li>
+    <li>
+      <a href="https://plus.google.com/share?url=/articles/2019-06/docker" class="google-plus btn" title="Share on Google Plus"><i class="fa fa-google-plus"></i><span> Google+</span></a>
+    </li>
+    <li>
+      <a href="https://news.ycombinator.com/submitlink?u=/articles/2019-06/docker" class="hacker-news btn" title="Share on Hacker News"><i class="fa fa-hacker-news"></i><span> Hacker News</span></a>
+    </li>
+    <li>
+      <a href="https://www.reddit.com/submit?url=/articles/2019-06/docker" class="reddit btn" title="Share on Reddit"><i class="fa fa-reddit"></i><span> Reddit</span></a>
+    </li>
+  </ul>
+</div><!-- end share-buttons -->
+
+
+
+        <footer>
+  &copy; 2019 Insiyah Hajoori. Powered by <a href="http://jekyllrb.com/">Jekyll</a>, <a href="http://github.com/renyuanz/leonids/">leonids theme</a> made with <i class="fa fa-heart heart-icon"></i>
+</footer>
+
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+
+
+</body>
+</html>
