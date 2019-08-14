@@ -5,20 +5,140 @@
     <description>I turn green tea into code.</description>
     <link>/</link>
     <atom:link href="/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>2019-06-06</pubDate>
-    <lastBuildDate>Thu, 06 Jun 2019 18:57:16 +0200</lastBuildDate>
+    <pubDate>2019-08-14</pubDate>
+    <lastBuildDate>Wed, 14 Aug 2019 19:06:41 +0200</lastBuildDate>
     <generator>Jekyll v3.1.6</generator>
+    
+      <item>
+        <title>GSoC&#39;19 - CaMicroscope</title>
+        <description>&lt;h2 id=&quot;synopsis&quot;&gt;Synopsis&lt;/h2&gt;
+
+&lt;h3 id=&quot;about-camicroscope&quot;&gt;About caMicroscope&lt;/h3&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;caMicroscope is a  Web Based Annotation and Visualization Platform for Digitized Whole Slide Images.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;It is a tool to view, annotate, and analyze whole-slide, biomedical images. It manages digital pathology images, associated clinical and imaging metadata, and human/machine generated annotations and markups.&lt;/p&gt;
+
+&lt;h3 id=&quot;about-the-project&quot;&gt;About the project&lt;/h3&gt;
+&lt;p&gt;The goal of this project is to allow model developers to test their trained models on the selected area of WSI.&lt;/p&gt;
+
+&lt;h3 id=&quot;why-this-feature-is-needed&quot;&gt;Why this feature is needed&lt;/h3&gt;
+&lt;p&gt;In general, the deep learning models are tested on a batch of images and later the predictions are visualized using various tools. If a whole slide image pertaining to a model is available, the model developer has to manually crop the required region he/she wants to test the performance on. This can be tedious if one wishes to test on soecific regions of the WSI.&lt;/p&gt;
+
+&lt;p&gt;By the addition of this feature to allow testing the models in the image viewer itself will likely improve the productivity and would allow the developer to have better insights about the performance of the model.&lt;/p&gt;
+
+&lt;h3 id=&quot;what-is-implemented&quot;&gt;What is implemented&lt;/h3&gt;
+&lt;p&gt;caMicroscope has an app that allows nuclei segmentation using watershed algorithm. It is extended to allow user to upload and test the segmentation models.
+An additional app to allow user to upload and test the classification models.&lt;/p&gt;
+
+&lt;h3 id=&quot;how-it-is-implemented&quot;&gt;How it is implemented&lt;/h3&gt;
+&lt;p&gt;The proposed features are implemented using TensorFlow.js. TensorFlow.js is a library for developing and training ML models in JavaScript and deploying in browser.&lt;/p&gt;
+
+&lt;p&gt;Models developed using Keras are compatible after a straighforward conversion.&lt;/p&gt;
+
+&lt;h3 id=&quot;mentors&quot;&gt;Mentors&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Ryan Birmingham&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Nan Li&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
+
+&lt;h3 id=&quot;whole-slide-imaging&quot;&gt;Whole Slide Imaging&lt;/h3&gt;
+&lt;p&gt;Whole slide imaging&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt; refers to scanning of conventional glass slides in order to produce digital slides. Prior to the introduction of WSI, digital imaging in anatomic pathology relied largely on microscope-mounted cameras to produce “static” digital images. These static images were of limited clinical utility because they captured only specific regions of a glass slide. WSI, also commonly referred to as “virtual microscopy”, aims to emulate conventional light microscopy in a computer-generated manner.&lt;/p&gt;
+
+&lt;p&gt;Practically speaking, WSI consists of two processes. The first process utilizes specialized hardware (scanner) to digitize glass slides, which generates a large representative digital image (so-called “digital slide”). The second process employs specialized software (ie, virtual slide viewer) to view and/or analyze these enormous digital files. &lt;em&gt;caMicroscope&lt;/em&gt; is one such virtual slide viewer.&lt;/p&gt;
+
+&lt;h3 id=&quot;pull-requests&quot;&gt;Pull Requests&lt;/h3&gt;
+
+&lt;h4 id=&quot;phase-1&quot;&gt;Phase 1&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/camicroscope/caMicroscope/pull/187&quot;&gt;Add support for Classification models&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Classification sample models&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;phase-2&quot;&gt;Phase 2&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/camicroscope/caMicroscope/pull/195&quot;&gt;Add support for segmentation models&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;phase-3&quot;&gt;Phase 3&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/camicroscope/caMicroscope/pull/197&quot;&gt;Change UI and patchwise prediction instead of hard resize&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Segmentation sample models&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;how-to-use&quot;&gt;How to use&lt;/h2&gt;
+
+&lt;p&gt;A detailed guide is linked &lt;a href=&quot;https://docs.google.com/document/d/127LIvqi_f3QzYQNYDXJm83AWVhq56igG4HpVa5xy-FM/edit#heading=h.nrnw03t7conb&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;how-to-contribute&quot;&gt;How to contribute&lt;/h2&gt;
+&lt;p&gt;caMicroscope should be deployed as part of a stack.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Clone &lt;a href=&quot;https://github.com/camicroscope/caMicroscope&quot;&gt;caMicroscope&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Clone the Docker distribution from &lt;a href=&quot;https://github.com/camicroscope/Distro&quot;&gt;camicroscope/Distro&lt;/a&gt;.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;In the above repo, edit &lt;em&gt;caMicroscope.yml&lt;/em&gt; and mount the cloned repo of caMicroscope as a volume under viewer as below.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yml&quot; data-lang=&quot;yml&quot;&gt;  &lt;span class=&quot;na&quot;&gt;viewer&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;../caMicroscope&quot;&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;container_name&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;ca-front&lt;/span&gt;
+    &lt;span class=&quot;na&quot;&gt;volumes&lt;/span&gt;&lt;span class=&quot;pi&quot;&gt;:&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;./config/login.html:/var/www/html/login.html&lt;/span&gt;
+      &lt;span class=&quot;pi&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;../caMicroscope/:/var/www/html/&lt;/span&gt;                         &lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;Change the current directory to Distro&lt;/p&gt;
+
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;cd Distro&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Run with&lt;/p&gt;
+
+    &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;docker-compose -f caMicroscope.yml up&lt;/code&gt;&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;Once everything is up, go to http://localhost:4010/.&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;&lt;a href=&quot;https://www.dovepress.com/whole-slide-imaging-in-pathology-advantages-limitations-and-emerging-p-peer-reviewed-article-PLMI&quot;&gt;Whole slide imaging in pathology: Advantages, limitations, and emerging perspectives&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;
+</description>
+        <pubDate>2019-08-14</pubDate>
+        <link>/articles/2019-08/GSOC-2019</link>
+        <guid isPermaLink="true">/articles/2019-08/GSOC-2019</guid>
+        
+        
+        <category>GSoC-19</category>
+        
+      </item>
     
       <item>
         <title>GSoC&#39;19 - Getting started</title>
         <description>&lt;p&gt;I wanted to participate in this program since a long time. I was really nervous when the organizations were announced. My mind was flooded with multiple questions, including whether or not I’ll be able to do it? Will I find the right project for me? I started shortlisting some organizations based on my skill sets. I had devoted most of time in the year 2018 working on machine learning and deep learning, with a previous experience in JS. I definitely didn’t want to do anything purely web. So after going through many of them, I can down to two organizations - BMI, Emory University and Red Hen Labs. Okay so here’s a checkpoint I’d like you to take note of.&lt;/p&gt;
 
 &lt;h5 id=&quot;choosing-the-right-organizations&quot;&gt;Choosing the right organizations&lt;/h5&gt;
-&lt;p&gt;A huge list of organisations is quite overwhelming at times. It was for me. But what here was, I noted down the programming languages I can work with and area I wanted to. For me, I wanted to work on a project related to machine learning and I knew python, C++ and JavaScript. This was all. I went through the organisations and made a list. It had about 15 organizations. That’s quite a number as you can put in only 3 proposals! Then in the second pass, I went through their projects to check how close were they to my interests and were my skill sets were sufficient for them. I started working on a few and ended up with two I put my most efforts in. These iterations require some patience but are crucial.&lt;/p&gt;
 
-&lt;p&gt;The common mistake made is going for well-known orgs which have a record of taking larger number of slots regardless of the interest. More number of slots don’t increase your probability of getting selected. Sometimes there’s even more competition due to large number of applications flowing in! I have made this mistake once when I applied for Outreachy last summer. I applied for just one org as it had the most intern positions and wasn’t even something I really wanted to do. There was quite a competition. Later when I went through the other orgs, I realized there were projects which I’d have loved to work on and had no applications. It is really important to make sure you choose according to your interests!&lt;/p&gt;
+&lt;p&gt;A huge list of organisations is quite overwhelming at times. It was for me. But what I did was, I noted down the programming languages I can work with and the area I wanted to. For me, I wanted to work on a project related to machine learning and I knew python, C++ and JavaScript. This was all. I went through the organisations and made a list. It had about 15 organizations. That’s quite a number as you can put in only 3 proposals! Then in the second pass, I went through their projects to check how close were they to my interests and were my skill sets were sufficient for them. I started working on a few and ended up with two I put my most efforts in. These iterations require some patience but are crucial.&lt;/p&gt;
 
-&lt;p&gt;The project initially caught my interest as it was literally a combo of all the skills I had and all the things I wanted to work on. I’ve been interested in medical data since a long time. This project focuses on browser-based models on such data which intensified my enthusiasm to dig deeper and think of all the ways CaMicroscope could be improved. I’m really happy and grateful to be able to work on this project this summers!&lt;/p&gt;
+&lt;p&gt;The common mistake made is going for well-known organisations which have a record of taking a larger number of slots regardless of the interest. The number of slots doesn’t increase your probability of getting selected. Sometimes there’s even more competition due to a large number of applications flowing in! I have made this mistake once when I applied for Outreachy last summer. I applied for just one organisation as it had the most intern positions and it wasn’t even something I really wanted to do. There was quite a competition. Later when I went through the other organisations, I realized there were projects which I’d have loved to work on and had no applications. It is really important to make sure you choose according to your interests!&lt;/p&gt;
+
+&lt;p&gt;The project initially caught my interest as it was literally a combo of all the skills I had and all the things I wanted to work on. I’ve been interested in medical data for a long time. This project focuses on browser-based models on such data which intensified my enthusiasm to dig deeper and think of all the ways CaMicroscope could be improved. I’m really happy and grateful to be able to work on this project this summers!&lt;/p&gt;
 
 &lt;p&gt;The following are the tasks for me this summer:&lt;/p&gt;
 
@@ -26,11 +146,10 @@
   &lt;li&gt;Creating a workflow to allow model developers to allow their model to be run on a selected image or region of interest by the client, to identify cellular features or cancer.&lt;/li&gt;
   &lt;li&gt;Add the latest deep learning models researched in the area of digital pathology to caMicroscope to help the pathologists.&lt;/li&gt;
   &lt;li&gt;Improve the segmentation app.&lt;/li&gt;
-  &lt;li&gt;A tutorial to enable users to make models compatible with caMicroscope.
-Further in this blog, I will document about the components I’ll be using to complete this project.&lt;/li&gt;
+  &lt;li&gt;A tutorial to enable users to make models compatible with caMicroscope.&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        <pubDate>2019-06-06</pubDate>
+        <pubDate>2019-08-14</pubDate>
         <link>/articles/2019-06/gsoc</link>
         <guid isPermaLink="true">/articles/2019-06/gsoc</guid>
         
@@ -53,7 +172,7 @@ Further in this blog, I will document about the components I’ll be using to co
 &lt;p&gt;Since we’re using docker-compose as it’s multi-container environment, all I had to do was to add &lt;code class=&quot;highlighter-rouge&quot;&gt;../caMicroscope/apps:/var/www/html/apps&lt;/code&gt;  under the volumes of the viewer in the config file. I really enjoyed the concept of docker!&lt;/p&gt;
 
 </description>
-        <pubDate>2019-06-06</pubDate>
+        <pubDate>2019-08-14</pubDate>
         <link>/articles/2019-06/docker</link>
         <guid isPermaLink="true">/articles/2019-06/docker</guid>
         
@@ -152,7 +271,7 @@ Take a look at my version here&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot
   &lt;/ol&gt;
 &lt;/div&gt;
 </description>
-        <pubDate>2019-06-06</pubDate>
+        <pubDate>2019-08-14</pubDate>
         <link>/articles/2018-05/math-js</link>
         <guid isPermaLink="true">/articles/2018-05/math-js</guid>
         
