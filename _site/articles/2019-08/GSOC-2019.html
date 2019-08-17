@@ -9,7 +9,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="description" content="Work done during Google Summer of Code - 2019 under Biomedical Informatics, Emory University.">
-  <meta name="keywords" content="blog and jekyll">
+  <meta name="keywords" content="blog, jekyll, GSOC, machine learning, and deep learning">
   <meta name="author" content="GSoC&#39;19 - CaMicroscope | Insiyah">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f5f5">
@@ -155,7 +155,7 @@
       <span class="read-time" title="Estimated read time">
   
   
-    3 mins read
+    6 mins read
   
 </span>
 
@@ -177,7 +177,7 @@
 <p>The goal of this project is to allow model developers to test their trained models on the selected area of WSI.</p>
 
 <h3 id="why-this-feature-is-needed">Why this feature is needed</h3>
-<p>In general, the deep learning models are tested on a batch of images and later the predictions are visualized using various tools. If a whole slide image pertaining to a model is available, the model developer has to manually crop the required region he/she wants to test the performance on. This can be tedious if one wishes to test on soecific regions of the WSI.</p>
+<p>In general, the deep learning models are tested on a batch of images and later the predictions are visualized using various tools. If a whole slide image pertaining to a model is available, the model developer has to manually crop the required region he/she wants to test the performance on. This can be tedious if one wishes to test on specific regions of the WSI.</p>
 
 <p>By the addition of this feature to allow testing the models in the image viewer itself will likely improve the productivity and would allow the developer to have better insights about the performance of the model.</p>
 
@@ -207,12 +207,58 @@ An additional app to allow user to upload and test the classification models.</p
 
 <p>Practically speaking, WSI consists of two processes. The first process utilizes specialized hardware (scanner) to digitize glass slides, which generates a large representative digital image (so-called “digital slide”). The second process employs specialized software (ie, virtual slide viewer) to view and/or analyze these enormous digital files. <em>caMicroscope</em> is one such virtual slide viewer.</p>
 
+<h3 id="tensorflowjs">TensorFlow.js</h3>
+<p>The models are executed in the client’s browser using TensorFlow.js. The viewer of segment and predict app allows the user to draw the region of interest in the integral multiple of the input patch/image size of the model. The model is executed on each window. The models are temporary stored using IndexedDB to make it possible to compare the performance of models on the different ROIs.</p>
+
+<p>For classification, i.e., predict app, the result displayed in the class with maximum average probability across all the windows. A CSV file can be downloaded which contains the probabilities of individual classes.</p>
+
+<p>For segmentation, the user can adjust the opacity of the mask to verify the performance of the model.</p>
+
+<h2 id="how-to-use">How to use</h2>
+<p><img src="../../img/toolbar.png" style="display:block; float: left;" /> <br /></p>
+
+<p>First the model is to be uploaded. While uploading, make sure to fill in correct values for input size and image type. While uploading the model is tested to ensure only valid models are saved in the IDB.</p>
+
+<p>Both the apps have the similar toolbar. After uploading the model, the user can select the model &amp; pre-processing method and draw the ROI by checking the first tool. The selected model will be executed. <br /></p>
+
+<p><img src="../../img/classify.png" style="display:inline-block; padding: 10px; width: 30%; height: 30%;" />
+<img src="../../img/segment.png" style="display:inline-block; padding: 10px; width: 29.1%; height: 29.1%;" /> <br /></p>
+
+<p>The user can save ROI, mask, probabilties using relevant tools.</p>
+
+<p>It is recommended to test the model on the same zoom level as the training images.</p>
+
+<h3 id="creating-models-compatible-with-camicroscope">Creating models compatible with caMicroscope</h3>
+
+<p>caMicroscope uses TensorFlow.js for deploying machine learning models. 
+Keras models (typically created via the Python API) may be saved in one of the several formats. The “whole model” format can be converted to TensorFlow.js Layers format, which can be loaded into caMicroscope. You’ll need to install the converter pip install tensorflowjs.</p>
+
+<figure class="highlight"><pre><code class="language-python" data-lang="python">  <span class="kn">import</span> <span class="nn">tensorflowjs</span> <span class="k">as</span> <span class="n">tfjs</span>
+  <span class="kn">import</span> <span class="nn">keras</span>
+
+  <span class="n">model</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Sequential</span><span class="p">()</span>   <span class="c"># for example</span>
+  <span class="o">...</span>
+  <span class="n">model</span><span class="o">.</span><span class="nb">compile</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
+  <span class="n">tfjs</span><span class="o">.</span><span class="n">converters</span><span class="o">.</span><span class="n">save_keras_model</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">tfjs_target_dir</span><span class="p">)</span>                        </code></pre></figure>
+
+<p>Or if you already have Keras model in the format model.hdf5, convert to TensorFlow.js Layers format using the following bash command:</p>
+
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">  tensorflowjs_converter <span class="nt">--input_format</span> keras <span class="se">\</span>
+                       path/to/my_model.hdf5 <span class="se">\</span>
+                       path/to/tfjs_target_dir                    </code></pre></figure>
+
+<p>The target TensorFlow.js Layers format is a directory containing a model.json file and a set of sharded weight files in binary format. The model.json file contains both the model topology (aka “architecture” or “graph”: a description of the layers and how they are connected) and a manifest of the weight files.</p>
+
+<p>If you’re uploading an offline copy, upload the model.json in the first input and all (and only) weight files in the second input. If the model is hosted, toggle to link a hosted model and enter the URL to model.json.
+A detailed guide is linked <a href="https://docs.google.com/document/d/127LIvqi_f3QzYQNYDXJm83AWVhq56igG4HpVa5xy-FM/edit#heading=h.nrnw03t7conb">here</a>.</p>
+
 <h3 id="pull-requests">Pull Requests</h3>
 
 <h4 id="phase-1">Phase 1</h4>
 <ul>
   <li><a href="https://github.com/camicroscope/caMicroscope/pull/187">Add support for Classification models</a></li>
-  <li>Classification sample models</li>
+  <li><a href="https://github.com/Insiyaa/caMicroscope-tfjs-models/tree/master/Classification%20Sample%20Models">Classification sample models</a></li>
 </ul>
 
 <h4 id="phase-2">Phase 2</h4>
@@ -223,12 +269,9 @@ An additional app to allow user to upload and test the classification models.</p
 <h4 id="phase-3">Phase 3</h4>
 <ul>
   <li><a href="https://github.com/camicroscope/caMicroscope/pull/197">Change UI and patchwise prediction instead of hard resize</a></li>
-  <li>Segmentation sample models</li>
+  <li><a href="https://github.com/camicroscope/caMicroscope/pull/198">Allow to select preprocessing technique</a></li>
+  <li><a href="https://github.com/Insiyaa/caMicroscope-tfjs-models/tree/master/Segmentation%20Sample%20Models/mitosis-segmentation">Segmentation sample models</a></li>
 </ul>
-
-<h2 id="how-to-use">How to use</h2>
-
-<p>A detailed guide is linked <a href="https://docs.google.com/document/d/127LIvqi_f3QzYQNYDXJm83AWVhq56igG4HpVa5xy-FM/edit#heading=h.nrnw03t7conb">here</a>.</p>
 
 <h2 id="how-to-contribute">How to contribute</h2>
 <p>caMicroscope should be deployed as part of a stack.</p>
@@ -263,6 +306,17 @@ An additional app to allow user to upload and test the classification models.</p
     <p>Once everything is up, go to http://localhost:4010/.</p>
   </li>
 </ul>
+
+<h2 id="future-improvements">Future improvements</h2>
+
+<ul>
+  <li>Support for tensorflow/tf_hub graph models. Currently (Aug-2019), tensorflow.js allows saving only the layersModel. The graph models are supposed to be used right away and can’t be stored. Tf_hub models are to be downloaded everytime. This issue is tracked <a href="https://github.com/tensorflow/tfjs/issues/1701">here</a>. Although, an experimental feature can be added to use graphModels right away.</li>
+</ul>
+
+<h3 id="end-note">End note:</h3>
+<p>I really enjoyed working on the project. The most important part is I learnt a lot many technologies while working on this project. I realised a lot many areas I need to work on. This whole program made me a better developer than I was before.</p>
+
+<p>I’d like to thank my mentors for being supportive during this whole period and guiding me! :)</p>
 
 <div class="footnotes">
   <ol>
