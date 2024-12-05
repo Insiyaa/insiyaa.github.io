@@ -2,5 +2,21 @@
 # if you don't have language feature(language.yml is empty), ignore "i18n" items
 - name: Google Summer of Code '19 - BMI, Emory University
   link: https://summerofcode.withgoogle.com/projects/#5485039276523520
-  date: May 2019 - <i class="fa fa-clock-o" aria-hidden="true" title="Until Now"></i>
+  date: May 2019 - August 2019
   job: Student Developer
+- name: Avalara
+  link: https://www.avalara.com/eu/en/index.html
+  date: Feb 2021 - June 2021
+  job: Engineering Intern
+- name: Avalara
+  link: https://www.avalara.com/eu/en/index.html
+  date: July 2021 - Oct 2022
+  job: Software Engineer
+- name: Amazon Web Services
+  link: https://aws.amazon.com/workspaces/thin-client/
+  date: Nov 2022 - Sept 2024
+  job: Software Development Engineer - 1
+- name: Amazon Web Services
+  link: https://aws.amazon.com/workspaces/thin-client/
+  date: Oct 2024 - <i class="fa fa-clock-o" aria-hidden="true" title="Until Now"></i>
+  job: Software Development Engineer - 2
